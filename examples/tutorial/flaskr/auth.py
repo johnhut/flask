@@ -42,6 +42,9 @@ def load_logged_in_user():
         g.user = (
             get_db().execute("SELECT * FROM user WHERE id = ?", (user_id,)).fetchone()
         )
+        print(f"{g.user['username']} :: {g.user['admin']}")
+        for a in g.user:
+            print(a)
 
 
 @bp.route("/register", methods=("GET", "POST"))
@@ -54,6 +57,7 @@ def register():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
+        admin = request.form["admin"]
         db = get_db()
         error = None
 
@@ -70,9 +74,11 @@ def register():
         if error is None:
             # the name is available, store it in the database and go to
             # the login page
+            if admin:
+                admin = 1
             db.execute(
-                "INSERT INTO user (username, password) VALUES (?, ?)",
-                (username, generate_password_hash(password)),
+                "INSERT INTO user (username, password, admin) VALUES (?, ?, ?)",
+                (username, generate_password_hash(password), admin),
             )
             db.commit()
             return redirect(url_for("auth.login"))
