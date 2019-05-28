@@ -58,7 +58,10 @@ def register():
         username = request.form["username"]
         password = request.form["password"]
         admin = request.form["admin"]
-        print(request.form["type_user"])
+        if "type_user" in request.form:
+            print(request.form["type_user"])
+        else:
+            print("type_user must be disabled")
         return render_template("auth/register.html")
         db = get_db()
         error = None

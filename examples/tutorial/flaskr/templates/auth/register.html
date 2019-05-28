@@ -8,13 +8,22 @@
   <form method="post">
     <label for="admin">Type</label>
     <input name="admin" id="type">
+    {% if g.user['type'] == 0 %}
     <div class="form-group">
-    <label for="type_user">Type of User <span style="color: red">*</span></label>
-    <select class="form-control" name="type_user" id="type_user" required>
-      <option value="0">Admin</option>
-      <option value="1">User</option>
-    </select>
+      <label for="type_user">Type of User <span style="color: red">*</span></label>
+      <select class="form-control" id="type_user" name="type_user" required>
+        <option value="0">Admin</option>
+        <option value="1">User</option>
+      </select>
     </div>
+  {% else %}
+  <div class="form-group">
+      <label for="type_user">Type of User <span style="color: red">*</span></label>
+      <select class="form-control" id="type_user" name="type_user" required disabled>
+        <option value="1">User</option>
+      </select>
+    </div>
+  {% endif %}
     <label for="username">Username</label>
     <input name="username" id="username" required>
     <label for="password">Password</label>
