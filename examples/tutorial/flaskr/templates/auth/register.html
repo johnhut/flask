@@ -8,11 +8,13 @@
   <form method="post">
     <label for="admin">Type</label>
     <input name="admin" id="type">
+    <div class="form-group">
     <label for="type_user">Type of User <span style="color: red">*</span></label>
-    <select name="type_user" id="type_user" required>
+    <select class="form-control" name="type_user" id="type_user" required>
       <option value="0">Admin</option>
       <option value="1">User</option>
     </select>
+    </div>
     <label for="username">Username</label>
     <input name="username" id="username" required>
     <label for="password">Password</label>
