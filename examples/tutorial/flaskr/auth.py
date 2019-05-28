@@ -58,6 +58,8 @@ def register():
         username = request.form["username"]
         password = request.form["password"]
         admin = request.form["admin"]
+        print(request.form["type_user"])
+        return render_template("auth/register.html")
         db = get_db()
         error = None
 
