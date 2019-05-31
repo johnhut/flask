@@ -6,11 +6,12 @@
   <ul>
     {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>
-        {% if g.user['admin'] %}
+        {% if g.user['admin'] == 0 %}
         <li><span>Admin</span>
         {% else %}
         <li><span>Not an admin</span>
         {% endif %}
+      <li><a href="{{ url_for('auth.register') }}">Register</a>
       <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
     {% else %}
       <li><a href="{{ url_for('auth.register') }}">Register</a>

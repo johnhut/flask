@@ -8,7 +8,7 @@
   <form method="post">
     <label for="admin">Type</label>
     <input name="admin" id="type">
-    {% if g.user['type'] == 0 %}
+    {% if g.user['admin'] == 0 %}
     <div class="form-group">
       <label for="type_user">Type of User <span style="color: red">*</span></label>
       <select class="form-control" id="type_user" name="type_user" required>

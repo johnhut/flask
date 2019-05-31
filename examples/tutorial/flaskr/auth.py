@@ -43,8 +43,6 @@ def load_logged_in_user():
             get_db().execute("SELECT * FROM user WHERE id = ?", (user_id,)).fetchone()
         )
         print(f"{g.user['username']} :: {g.user['admin']}")
-        for a in g.user:
-            print(a)
 
 
 @bp.route("/register", methods=("GET", "POST"))
@@ -59,9 +57,9 @@ def register():
         password = request.form["password"]
         admin = request.form["admin"]
         if "type_user" in request.form:
-            print(request.form["type_user"])
+            print(f'register post: {request.form["type_user"]}')
         else:
-            print("type_user must be disabled")
+            print("register post: type_user must be disabled")
         return render_template("auth/register.html")
         db = get_db()
         error = None
@@ -89,6 +87,11 @@ def register():
             return redirect(url_for("auth.login"))
 
         flash(error)
+    else:
+        db = get_db()
+        with db:
+            db.execute("update user set admin=0 where username='tui'")
+            db.commit()
 
     return render_template("auth/register.html")
 
